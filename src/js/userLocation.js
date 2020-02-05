@@ -1,4 +1,50 @@
-export const getUserLocation = () => {
+const userCity = document.getElementById('city');
+const userCountry = document.getElementById('country');
+
+class UserLocation {
+constructor(lat, lon){
+  this._lat = lat;
+  this._lon = lon;
+  this.city = '';
+}
+
+
+setLat(latValue){
+  this.lat = latValue;
+}
+setLon(lonValue){
+  this.lon = lonValue;
+}
+setCity(cityValue){
+  this.city = cityValue;
+}
+getLat(){
+  return this.lat;
+}
+getLon(){
+  return this.lon;
+}
+getCity(){
+  return this.city;
+}
+
+getCityNameByCordinates (lat, lon){
+  return new Promise(function(resolve, reject) {
+    fetch(`https://geocode.xyz/${lat},${lon}?geoit=json`)
+      .then(res => res.json())
+      .then(async data => {
+        console.log(data);
+        userCity.innerHTML = `${data.city}, `
+        userCountry.innerHTML = `${data.prov}`
+        resolve(data.city);
+      })
+      .catch(() => {
+        reject();
+      });
+  });
+};
+
+getUserLocation () {
     return new Promise(function(resolve, reject) {
       window.navigator.geolocation.getCurrentPosition(
         async position => {
@@ -24,8 +70,7 @@ export const getUserLocation = () => {
               }
             }
           }
-          let city = await getCityNameByCordinates(lat, lon);
-          resolve([city, lat, lon]);
+          resolve({lat, lon});
         },
         err => {
           reject(err);
@@ -34,15 +79,9 @@ export const getUserLocation = () => {
     });
   };
   
-  const getCityNameByCordinates = (lat, lon) => {
-    return new Promise(function(resolve, reject) {
-      fetch(`https://geocode.xyz/${lat},${lon}?geoit=json`)
-        .then(res => res.json())
-        .then(data => {
-          resolve(data.city);
-        })
-        .catch(() => {
-          reject();
-        });
-    });
-  };
+  
+
+
+}
+
+export default UserLocation;
