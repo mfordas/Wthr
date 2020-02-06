@@ -8,21 +8,21 @@
     <title>Wthr</title>
     <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- <script defer src="../js/index.js"></script> -->
 </head>
 
 <body>
     
     <div class="main-container">
-        <div class="location-container" ><span id="city"></span><span id="country"></span>
-        </div>
+        <div class="location-container" id="location-container"><span id="city"></span><span id="country"></span></div>
+        <div class="input hide" id="input-container"><input id="input" value="Type city"></input></div>
         <div class="weather-container">
             <div class="temperature" ><span id="temperature"></span>°C</div>
             <div class="wind"><span id="wind"></span> m/s</div>
             <div class="humidity" ><span id="humidity"></span> %</div>
             <div class="pressure" ><span id="pressure"></span> hPa</div>
-            <div class="icon"><span id="icon"></span></div>
+            <img id="icon" src=''/>
         </div>
+        <div class="icons-author-container">Icons made by <a href="https://www.flaticon.com/authors/those-icons" title="Those Icons">Those Icons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a></div>
 </div>
 </body>
 

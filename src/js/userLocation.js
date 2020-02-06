@@ -33,10 +33,25 @@ getCityNameByCordinates (lat, lon){
     fetch(`https://geocode.xyz/${lat},${lon}?geoit=json`)
       .then(res => res.json())
       .then(async data => {
-        console.log(data);
         userCity.innerHTML = `${data.city}, `
         userCountry.innerHTML = `${data.prov}`
         resolve(data.city);
+      })
+      .catch(() => {
+        reject();
+      });
+  });
+};
+
+
+getCityCoordinatesByName (cityName){
+  return new Promise(function(resolve, reject) {
+    fetch(`https://geocode.xyz/?locate=${cityName}&geoit=json`)
+      .then(res => res.json())
+      .then(async data => {
+        userCity.innerHTML = `${data.standard.city}, `
+        userCountry.innerHTML = `${data.standard.prov}`
+        resolve(data);
       })
       .catch(() => {
         reject();

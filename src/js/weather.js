@@ -1,20 +1,77 @@
-
-
 const temperature = document.getElementById('temperature');
 const wind = document.getElementById('wind');
 const humidity = document.getElementById('humidity');
 const pressure = document.getElementById('pressure');
+const icon = document.getElementById('icon');
+
+
+
+import sunSrc from '../img/sun.png';
+import weatherSrc from '../img/weather.png';
+import weather2Src from '../img/weather_2.png';
+import cloudSrc from '../img/cloud.png';
+import cloudySrc from '../img/cloudy.png';
+import rainSrc from '../img/rain.png';
+import stormSrc from '../img/storm.png';
+import snowflakeSrc from '../img/snowflake.png';
+import fogSrc from '../img/fog.png';
+import foggySrc from '../img/foggy.png';
+import atmospheric2Src from '../img/atmospheric_2.png';
+import atmosphericSrc from '../img/atmospheric.png';
+import moonSrc from '../img/moon.png';
+import nightSrc from '../img/night.png';
+import gaugeSrc from '../img/gauge.png';
+import humiditySrc from '../img/humidity.png';
+import windSrc from '../img/wind.png';
+
+// const sun = new Image();
+// sun.src = sunSrc; 
+// const weather = new Image();
+// weather.src = weatherSrc; 
+// const weather2 = new Image();
+// weather2.src = weather2Src; 
+// const cloudy = new Image();
+// cloudy.src = cloudySrc; 
+// const rain = new Image();
+// rain.src = rainSrc; 
+// const storm = new Image();
+// storm.src = stormSrc; 
+// const snowflake = new Image();
+// snowflake.src = snowflakeSrc; 
+// const fog = new Image();
+// fog.src = fogSrc; 
+// const foggy = new Image();
+// foggy.src = foggySrc; 
+// const atmospheric = new Image();
+// atmospheric.src = atmosphericSrc; 
+// const atmospheric2 = new Image();
+// atmospheric2.src = atmospheric2Src; 
+// const moon = new Image();
+// moon.src = moonSrc; 
+// const night = new Image();
+// night.src = nightSrc; 
+// const gauge = new Image();
+// gauge.src = gaugeSrc; 
+// const humidityIcon = new Image();
+// humidityIcon.src = humiditySrc; 
+// const windIcon = new Image();
+// windIcon.src = windSrc; 
+
 
 class Weather {
   constructor(lat, lon) {
     this.lat = lat;
     this.lon = lon;
+    this.src = ''
   }
   setLat(value) {
     return (this.lat = value);
   }
   setLon(value) {
     return (this.lon = value);
+  }
+  setSrc(value) {
+    return (this.src = value);
   }
 
   getCoordinates(lat, lng) {
@@ -29,10 +86,62 @@ class Weather {
     let weatherApiURL = `https://api.openweathermap.org/data/2.5/weather?lat=${this.lat}&lon=${this.lon}&units=metric&APPID=${weatherApiKey}`;
     return weatherApiURL;
   }
-  
+
+  chooseIcon(iconCode) {
+    switch (iconCode) {
+      case '01d':
+        this.setSrc(sunSrc);
+        break;
+      case '01n':
+        this.setSrc(nightSrc);
+        break;
+      case '02d':
+        this.setSrc(weatherSrc);
+        break;
+      case '02n':
+        this.setSrc(moonSrc);
+        break;
+      case '03d':
+      case '03n':
+        this.setSrc(cloudSrc);
+        break;
+      case '04d':
+      case '04n':
+        this.setSrc(cloudySrc);
+        break;
+      case '09d':
+      case '09n':
+        this.setSrc(rainSrc);
+        break;
+      case '10d':
+        this.setSrc(weather2Src);
+        break;
+      case '10n':
+        this.setSrc(atmospheric2Src);
+        break;
+      case '11d':
+        this.setSrc(stormSrc);
+        break;
+      case '11n':
+        this.setSrc(atmosphericSrc);
+        break;
+      case '13d':
+      case '13n':
+        this.setSrc(snowflakeSrc);
+        break;
+      case '50d':
+        this.setSrc(fogSrc);
+        break;
+      case '50n':
+        this.setSrc(foggySrc);
+        break;
+      default:
+        console.log('Doesnt work');
+    }
+  }
+
   //sending API call
   apiCall(setURL) {
-      console.log('works');
     fetch(setURL)
       .then(res => res.json())
       .then(data => {
@@ -41,8 +150,18 @@ class Weather {
         humidity.innerHTML = `${data.main.humidity}`;
         humidity.innerHTML = `${data.main.humidity}`;
         pressure.innerHTML = `${data.main.pressure}`;
+        console.log(data.weather[0].icon);
+        this.chooseIcon(data.weather[0].icon);
+        icon.src = `${this.src}`;
       });
   }
+
+  reload(latValue, lonValue) {
+    this.setLat(latValue);
+    this.setLon(lonValue);
+    this.apiCall(this.setURL());
+  }
+
 }
 
 export default Weather;
