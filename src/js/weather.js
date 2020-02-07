@@ -27,40 +27,6 @@ import gaugeSrc from '../img/gauge.png';
 import humiditySrc from '../img/humidity.png';
 import windSrc from '../img/wind.png';
 
-// const sun = new Image();
-// sun.src = sunSrc; 
-// const weather = new Image();
-// weather.src = weatherSrc; 
-// const weather2 = new Image();
-// weather2.src = weather2Src; 
-// const cloudy = new Image();
-// cloudy.src = cloudySrc; 
-// const rain = new Image();
-// rain.src = rainSrc; 
-// const storm = new Image();
-// storm.src = stormSrc; 
-// const snowflake = new Image();
-// snowflake.src = snowflakeSrc; 
-// const fog = new Image();
-// fog.src = fogSrc; 
-// const foggy = new Image();
-// foggy.src = foggySrc; 
-// const atmospheric = new Image();
-// atmospheric.src = atmosphericSrc; 
-// const atmospheric2 = new Image();
-// atmospheric2.src = atmospheric2Src; 
-// const moon = new Image();
-// moon.src = moonSrc; 
-// const night = new Image();
-// night.src = nightSrc; 
-// const gauge = new Image();
-// gauge.src = gaugeSrc; 
-// const humidityIcon = new Image();
-// humidityIcon.src = humiditySrc; 
-// const windIcon = new Image();
-// windIcon.src = windSrc; 
-
-
 class Weather {
   constructor(lat, lon) {
     this.lat = lat;
@@ -153,7 +119,6 @@ class Weather {
         humidity.innerHTML = `${data.main.humidity}`;
         humidity.innerHTML = `${data.main.humidity}`;
         pressure.innerHTML = `${data.main.pressure}`;
-        console.log(data.weather[0].icon);
         this.chooseIcon(data.weather[0].icon);
         icon.src = `${this.src}`;
       });

@@ -16,10 +16,10 @@ const userLocation = new UserLocation(defaultCity.lat, defaultCity.lon);
 weather.icons();
 
 userLocation.getUserLocation()
-  .then(async data => {
+  .then(data => {
     userLocation.setLat(data.lat);
     userLocation.setLon(data.lon);
-    let city = await userLocation.getCityNameByCordinates(data.lat, data.lon);
+    let city = userLocation.getCityNameByCordinates(data.lat, data.lon);
     userLocation.setCity(city);
     weather.reload(userLocation.lat, userLocation.lon);
   }).catch(err => console.log('Errror'));
