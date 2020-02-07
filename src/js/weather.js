@@ -3,6 +3,9 @@ const wind = document.getElementById('wind');
 const humidity = document.getElementById('humidity');
 const pressure = document.getElementById('pressure');
 const icon = document.getElementById('icon');
+const windIcon = document.getElementById('windIcon');
+const humidityIcon = document.getElementById('humidityIcon');
+const pressureIcon = document.getElementById('pressureIcon');
 
 
 
@@ -160,6 +163,12 @@ class Weather {
     this.setLat(latValue);
     this.setLon(lonValue);
     this.apiCall(this.setURL());
+  }
+
+  icons(){
+    windIcon.src = `${windSrc}`;
+    humidityIcon.src = `${humiditySrc}`;
+    pressureIcon.src = `${gaugeSrc}`;
   }
 
 }

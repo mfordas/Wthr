@@ -89,8 +89,11 @@ html, input {
 }
 
 
-.wind, .humidity {
+.wind, .humidity, .pressure {
     font-size: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #icon {
@@ -102,10 +105,36 @@ html, input {
 display: none;
 }
 
+#windIcon, #humidityIcon, #pressureIcon {
+    max-height: 3rem;
+    padding: 0.5rem 0.5rem;
+    
+}
 
 
 
+@media (max-height: 420px){
+    .weather-container{
+        flex-wrap: wrap;
+        width: 420px;
+        height: 80vh;
+        padding: .5rem .5rem;
+    }
 
-@media (max-width: 1024px){
+    .icons-author-container{
+        width: auto;
+    }
 
+    .wind, .humidity, .pressure {
+        font-size: 2rem;
+        display: flex;
+    }
+
+    .temperature {
+        font-size: 9rem;
+    }
+
+    #windIcon, #humidityIcon, #pressureIcon {
+        max-height: 2rem;
+    }
 }

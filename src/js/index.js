@@ -13,6 +13,8 @@ const defaultCity = {
 const weather = new Weather(defaultCity.lat, defaultCity.lon);
 const userLocation = new UserLocation(defaultCity.lat, defaultCity.lon);
 
+weather.icons();
+
 userLocation.getUserLocation()
   .then(async data => {
     userLocation.setLat(data.lat);
