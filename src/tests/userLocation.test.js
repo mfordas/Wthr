@@ -54,10 +54,10 @@ test('Get city name by coordinates', async () => {
 
 
 test('Get coordinates by city name', async () => {
-    expect.assertions(1);
-    const data = await userLocationObject.getCityCoordinatesByName(`Wrocław`);
-    expect(data.latt).toBe(51.07143);
-    // expect(data.longt).toBe(16.99369);
+    expect.assertions(2);
+    const data = await userLocationObject.getCityCoordinatesByName('Wroclaw');
+    expect(data.latt).toBe("51.11411");
+    expect(data.longt).toBe("17.01196");
 })
 
 

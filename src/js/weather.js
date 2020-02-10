@@ -29,81 +29,61 @@ import windSrc from '../img/wind.png';
 
 class Weather {
   constructor(lat, lon) {
-    this.lat = lat;
-    this.lon = lon;
-    this.src = ''
+    this._lat = lat;
+    this._lon = lon;
+    this._src = ''
   }
   setLat(value) {
-    return (this.lat = value);
+    return (this._lat = value);
   }
   setLon(value) {
-    return (this.lon = value);
+    return (this._lon = value);
   }
   setSrc(value) {
-    return (this.src = value);
-  }
-
-  getCoordinates(lat, lng) {
-    this.setLat(lat);
-    this.setLon(lng);
-    return this.apiCall(this.setURL());
+    return (this._src = value);
   }
 
   // set URL address for API call
   setURL() {
     let weatherApiKey = '47f83ac09c8aba4209901acd619fdb03';
-    let weatherApiURL = `https://api.openweathermap.org/data/2.5/weather?lat=${this.lat}&lon=${this.lon}&units=metric&APPID=${weatherApiKey}`;
+    let weatherApiURL = `https://api.openweathermap.org/data/2.5/weather?lat=${this._lat}&lon=${this._lon}&units=metric&APPID=${weatherApiKey}`;
     return weatherApiURL;
   }
 
   chooseIcon(iconCode) {
     switch (iconCode) {
       case '01d':
-        this.setSrc(sunSrc);
-        break;
+        return this.setSrc(sunSrc);
       case '01n':
-        this.setSrc(nightSrc);
-        break;
+        return this.setSrc(nightSrc);
       case '02d':
-        this.setSrc(weatherSrc);
-        break;
+        return this.setSrc(weatherSrc);
       case '02n':
-        this.setSrc(moonSrc);
-        break;
+        return this.setSrc(moonSrc);
       case '03d':
       case '03n':
-        this.setSrc(cloudSrc);
-        break;
+        return this.setSrc(cloudSrc);
       case '04d':
       case '04n':
-        this.setSrc(cloudySrc);
-        break;
+        return this.setSrc(cloudySrc);
       case '09d':
       case '09n':
-        this.setSrc(rainSrc);
-        break;
+        return this.setSrc(rainSrc);
       case '10d':
-        this.setSrc(weather2Src);
-        break;
+        return this.setSrc(weather2Src);
       case '10n':
-        this.setSrc(atmospheric2Src);
-        break;
+        return this.setSrc(atmospheric2Src);
       case '11d':
-        this.setSrc(stormSrc);
-        break;
+        return this.setSrc(stormSrc);
       case '11n':
-        this.setSrc(atmosphericSrc);
-        break;
+        return this.setSrc(atmosphericSrc);
       case '13d':
       case '13n':
-        this.setSrc(snowflakeSrc);
-        break;
+        return this.setSrc(snowflakeSrc);
       case '50d':
-        this.setSrc(fogSrc);
-        break;
+        return this.setSrc(fogSrc);
       case '50n':
-        this.setSrc(foggySrc);
-        break;
+        return this.setSrc(foggySrc);
       default:
         console.log('Doesnt work');
     }
@@ -120,7 +100,7 @@ class Weather {
         humidity.innerHTML = `${data.main.humidity}`;
         pressure.innerHTML = `${data.main.pressure}`;
         this.chooseIcon(data.weather[0].icon);
-        icon.src = `${this.src}`;
+        icon.src = `${this._src}`;
       });
   }
 
