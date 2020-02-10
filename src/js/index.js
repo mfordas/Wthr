@@ -19,9 +19,9 @@ userLocation.getUserLocation()
   .then(async data => {
     userLocation.setLat(data.lat);
     userLocation.setLon(data.lon);
-    let city = await userLocation.getCityNameByCordinates(data.lat, data.lon);
+    let city = await userLocation.getCityNameByCoordinates(data.lat, data.lon).then(data => {userLocation.changeLocationByCoordinates(data); return data.city});
     userLocation.setCity(city);
-    weather.reload(userLocation.lat, userLocation.lon);
+    weather.reload(userLocation._lat, userLocation._lon);
   }).catch(err => console.log('Errror'));
 weather.apiCall(weather.setURL());
 
@@ -34,9 +34,10 @@ showCityInput.addEventListener('click', () => hideCityInput.classList.remove('hi
 changeCityInput.addEventListener('click', () =>  changeCityInput.value = '');
 
 changeCityInput.addEventListener('change', () => userLocation.getCityCoordinatesByName(changeCityInput.value).then(async data => {
+  userLocation.changeLocationByName(data);
   userLocation.setLat(data.latt);
   userLocation.setLon(data.longt);
   userLocation.setCity(data.standard.city);
-  weather.reload(userLocation.lat, userLocation.lon);
+  weather.reload(userLocation._lat, userLocation._lon);
   hideCityInput.classList.add('hide');
 }).catch(err => console.log('Errror')));
