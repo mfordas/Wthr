@@ -1,12 +1,25 @@
+const fetch = require('node-fetch');
 const userCity = document.getElementById('city');
 const userCountry = document.getElementById('country');
-const fetch = require('node-fetch');
+
+const locationIcon = document.getElementById('icon-location');
+const confirmIcon = document.getElementById('icon-confirm');
+
+
+
+import locationSrc from '../img/pin.png';
+import confirmSrc from '../img/checked.png';
 
 class UserLocation {
   constructor(lat, lon) {
     this._lat = lat;
     this._lon = lon;
     this.city = '';
+  }
+
+  icons(){
+    locationIcon.src = `${locationSrc}`;
+    confirmIcon.src = `${confirmSrc}`;
   }
 
 
@@ -30,10 +43,10 @@ class UserLocation {
   }
 
   changeLocationByName(data) {
-    return userCity.innerHTML = `${data.standard.city}, `, userCountry.innerHTML = `${data.standard.prov}`;
+    return userCity.innerHTML = `${data.standard.city}`, userCountry.innerHTML = `, ${data.standard.prov}`;
   }
   changeLocationByCoordinates(data) {
-    return userCity.innerHTML = `${data.city}, `, userCountry.innerHTML = `${data.prov}`;
+    return userCity.innerHTML = `${data.city}`, userCountry.innerHTML = `, ${data.prov}`;
   }
 
   getCityNameByCoordinates(lat, lon) {
