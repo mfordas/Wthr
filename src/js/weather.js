@@ -31,7 +31,8 @@ class Weather {
   constructor(lat, lon) {
     this._lat = lat;
     this._lon = lon;
-    this._src = ''
+    this._src = '',
+      this._srcFavIcon = ''
   }
   setLat(value) {
     return (this._lat = value);
@@ -89,6 +90,14 @@ class Weather {
     }
   }
 
+  setFavIcon() {
+    const link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+    link.type = 'image/x-icon';
+    link.rel = 'shortcut icon';
+    link.href = this._src;
+    document.getElementsByTagName('head')[0].appendChild(link);
+  };
+
   //sending API call
   apiCall(setURL) {
     fetch(setURL)
@@ -101,6 +110,7 @@ class Weather {
         pressure.innerHTML = `${data.main.pressure}`;
         this.chooseIcon(data.weather[0].icon);
         icon.src = `${this._src}`;
+        this.setFavIcon();
       });
   }
 
@@ -110,7 +120,7 @@ class Weather {
     this.apiCall(this.setURL());
   }
 
-  icons(){
+  icons() {
     windIcon.src = `${windSrc}`;
     humidityIcon.src = `${humiditySrc}`;
     pressureIcon.src = `${gaugeSrc}`;

@@ -1,5 +1,6 @@
 import Weather from './weather';
 import UserLocation from './userLocation';
+import * as Script from './googleAnalytics'
 import '../css/main.css';
 
 
@@ -42,3 +43,5 @@ changeCityInputButton.addEventListener('click', () => userLocation.getCityCoordi
   weather.reload(userLocation._lat, userLocation._lon);
   hideCityInput.classList.add('hide');
 }).catch(err => console.log('Errror')));
+
+Script.loadScript();
