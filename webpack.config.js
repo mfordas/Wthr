@@ -47,7 +47,7 @@ module.exports = {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        filename: 'index.html',
+        filename: 'Wthr.html',
         template: './src/html/index.html'
       }),
       new ExtractTextPlugin({

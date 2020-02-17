@@ -21,10 +21,13 @@ userLocation.getUserLocation()
   .then(async data => {
     userLocation.setLat(data.lat);
     userLocation.setLon(data.lon);
-    let city = await userLocation.getCityNameByCoordinates(data.lat, data.lon).then(data => {userLocation.changeLocationByCoordinates(data); return data.city});
+    let city = await userLocation.getCityNameByCoordinates(data.lat, data.lon).then(data => {
+      userLocation.changeLocationByCoordinates(data);
+      return data.city
+    });
     userLocation.setCity(city);
     weather.reload(userLocation._lat, userLocation._lon);
-  }).catch(err => console.log('Errror'));
+  }).catch(err => document.getElementById('city').innerHTML = 'Please share you location');
 weather.apiCall(weather.setURL());
 
 const showCityInput = document.getElementById("location-container");
@@ -33,15 +36,19 @@ const changeCityInputButton = document.getElementById("icon-confirm");
 const hideCityInput = document.getElementById("input-container");
 
 showCityInput.addEventListener('click', () => hideCityInput.classList.remove('hide'));
-changeCityInput.addEventListener('click', () =>  changeCityInput.value = '');
+changeCityInput.addEventListener('click', () => changeCityInput.value = '');
 
-changeCityInputButton.addEventListener('click', () => userLocation.getCityCoordinatesByName(changeCityInput.value).then(async data => {
+changeCityInputButton.addEventListener('click', async () => await userLocation.getCityCoordinatesByName(changeCityInput.value).then(data => {
+  if (data.error === undefined){
   userLocation.changeLocationByName(data);
   userLocation.setLat(data.latt);
   userLocation.setLon(data.longt);
   userLocation.setCity(data.standard.city);
   weather.reload(userLocation._lat, userLocation._lon);
-  hideCityInput.classList.add('hide');
-}).catch(err => console.log('Errror')));
+  hideCityInput.classList.add('hide');} else {
+    document.getElementById('city').innerHTML = 'City not found';
+    document.getElementById('country').innerHTML = ', try again';
+  }
+}).catch(err => err));
 
 Script.loadScript();
