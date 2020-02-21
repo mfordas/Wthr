@@ -53,11 +53,11 @@ class UserLocation {
     return new Promise(function (resolve, reject) {
       fetch(`https://geocode.xyz/${lat},${lon}?geoit=json`)
         .then(res => res.json())
-        .then(async data => {
+        .then(data => {
           resolve(data);
         })
-        .catch(() => {
-          reject();
+        .catch((error) => {
+          reject(error);
         });
     });
   };
@@ -67,11 +67,11 @@ class UserLocation {
     return new Promise(function (resolve, reject) {
       fetch(`https://geocode.xyz/?locate=${cityName}&geoit=json`)
         .then(res => res.json())
-        .then(async data => {
+        .then(data => {
           resolve(data);
         })
-        .catch(() => {
-          reject();
+        .catch((data) => {
+          reject(data);
         });
     });
   };

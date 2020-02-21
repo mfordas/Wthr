@@ -17,6 +17,7 @@ module.exports = {
       extensions: ['.js'],
     },
     devServer: {
+      index: 'Wthr.html',
       contentBase: path.join(__dirname, 'dist'),
       compress: true,
       port: 8080

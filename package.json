@@ -15,7 +15,7 @@
   },
   "author": "mfordas",
   "license": "ISC",
-  "homepage": "index.html",
+  "homepage": "Wthr.html",
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
     "babel-jest": "^25.1.0",

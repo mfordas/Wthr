@@ -2,7 +2,7 @@
 
 html, input {
     font-size: 10px;
-    background-color: #046e4a
+    background-color: #03875b;
   }
   
   body,html, input > span{
@@ -92,7 +92,7 @@ html, input {
     align-self: center;
     justify-self: center;
     height: 1.5rem;
-    padding: 0rem .5rem;
+    padding: 0rem .5rem 0rem 2.5rem;
     z-index: 100;
 
 }
