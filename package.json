@@ -22,7 +22,7 @@
     "cities": "^2.0.0",
     "cities.json": "^1.1.5",
     "core-js": "^2.6.11",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^3.1.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.3",
